@@ -2,7 +2,7 @@ const testimonials = [
   {
     quote:
       "The jeera jar has been on our tea table since I was in school. Nothing else tastes like it, and I have tried.",
-    author: "Rina, Bidhannagar",
+    author: "Rina, Baguihati",
   },
   {
     quote:

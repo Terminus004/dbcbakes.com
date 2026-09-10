@@ -14,12 +14,12 @@ export type Product = {
 };
 
 export const categories: { name: Category; blurb: string; image: string }[] = [
-  { name: "Cakes", blurb: "Plum, fruit, roll and foil cakes — the Durgapur classics.", image: "/images/cupcakes.jpg" },
-  { name: "Breads & Buns", blurb: "Soft loaves and cream buns baked before sunrise.", image: "/images/bread.jpg" },
-  { name: "Biscuits", blurb: "Jeera, badam, nan khatai — sold by the piece.", image: "/images/cookies.jpg" },
-  { name: "Biscuit Jars", blurb: "Our signature jars. Twenty-plus flavours, always crisp.", image: "/images/cookies.jpg" },
-  { name: "Toast & Rusk", blurb: "Makhan and Bombay toast, made for evening tea.", image: "/images/bread.jpg" },
-  { name: "Snacks", blurb: "Anytime mixes and chips for the road.", image: "/images/cookies.jpg" },
+  { name: "Cakes", blurb: "Plum, fruit, roll and foil cakes — the Durgapur classics.", image: "/images/brownies.jpg" },
+  { name: "Breads & Buns", blurb: "Soft loaves and cream buns baked before sunrise.", image: "/images/buns.jpg" },
+  { name: "Biscuits", blurb: "Jeera, badam, nan khatai — sold by the piece.", image: "/images/cookie-bowl.jpg" },
+  { name: "Biscuit Jars", blurb: "Our signature jars. Twenty-plus flavours, always crisp.", image: "/images/coconut-jar.jpg" },
+  { name: "Toast & Rusk", blurb: "Makhan and Bombay toast, made for evening tea.", image: "/images/rusk.jpg" },
+  { name: "Snacks", blurb: "Anytime mixes and chips for the road.", image: "/images/snack-mix.jpg" },
 ];
 
 // Source: dbcbakes.com/menu (Sept 2026). Names normalised from the POS export; prices as published.

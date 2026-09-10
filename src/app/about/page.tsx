@@ -16,7 +16,7 @@ const timeline = [
   },
   {
     year: "2025",
-    text: "The family incorporates as DBC Bakery Private Limited and opens a head office in Kolkata, alongside the original Durgapur bakery.",
+    text: "The family incorporates as DBC Bakery Private Limited and opens in Baguihati, Kolkata, alongside the original Durgapur bakery.",
   },
   {
     year: "Today",
@@ -119,9 +119,9 @@ export default function AboutPage() {
               sizes="(min-width: 1024px) 1024px, 100vw"
               className="h-[22rem] w-full object-cover md:h-[28rem]"
             />
-            <div className="absolute inset-0 bg-cocoa/55" />
+            <div className="absolute inset-0 bg-espresso/60" />
             <blockquote className="absolute inset-0 flex items-center justify-center px-6 text-center">
-              <p className="font-display max-w-2xl text-2xl italic text-paper md:text-3xl">
+              <p className="font-display max-w-2xl text-2xl italic text-linen md:text-3xl">
                 &ldquo;{brand.quote}&rdquo;
               </p>
             </blockquote>

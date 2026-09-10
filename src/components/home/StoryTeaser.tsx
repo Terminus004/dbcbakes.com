@@ -10,10 +10,10 @@ export default function StoryTeaser() {
           <div aria-hidden className="absolute -bottom-4 -left-4 h-full w-full rounded-[1.75rem] border-2 border-butter sm:-bottom-5 sm:-left-5" />
           <div className="relative overflow-hidden rounded-[1.75rem] bg-paper">
             <Image
-              src="/images/winter-campaign.jpg"
-              alt="DBC Bakery winter poster showing a plum cake and the bakery's red monogram"
-              width={1280}
-              height={853}
+              src="/images/press-clipping.jpg"
+              alt="Bengali newspaper clipping about the two brothers behind Durgapur Bakery, with a photo of the founder at the shop counter"
+              width={906}
+              height={600}
               sizes="(min-width: 1024px) 46vw, 100vw"
               className="h-auto w-full object-cover"
             />
@@ -31,8 +31,8 @@ export default function StoryTeaser() {
             evening bread; the biscuit jar on the shelf became the one on their tea table.
           </p>
           <p className="mt-4 leading-relaxed text-cocoa-soft">
-            In 2025 the family incorporated as {brand.legalName}, with a head office in Salt
-            Lake. Same hands, same measures, same jars — now carried to Kolkata as well.
+            In 2025 the family incorporated as {brand.legalName} and set up in Baguihati,
+            Kolkata. Same hands, same measures, same jars — now carried to the city as well.
           </p>
           <p className="mt-6 font-display text-xl italic">&ldquo;{brand.quote}&rdquo;</p>
           <Link href="/about" className="btn btn-ghost mt-8">Read our story</Link>

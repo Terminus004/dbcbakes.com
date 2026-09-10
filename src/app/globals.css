@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
 /* DBC Bakery design tokens — brand red from the logo, cream paper, cocoa ink, butter gold accent */
 :root {
   --cream: #fbf6ee;
@@ -11,6 +13,24 @@
   --brand-deep: #7f1f1f;
   --butter: #e0b25a;
   --butter-soft: #f4dfae;
+  --espresso: #3b2a22; /* literal: bands that stay dark in both themes */
+  --linen: #fbf6ee;    /* literal: text on those bands and on brand red */
+  color-scheme: light;
+}
+
+/* Dark theme — same warm family: espresso surfaces, cream ink, lifted red so it still reads on dark */
+[data-theme="dark"] {
+  color-scheme: dark;
+  --cream: #16100d;
+  --cream-deep: #1e1613;
+  --paper: #251b17;
+  --cocoa: #f4ebdf;
+  --cocoa-soft: #c6b09e;
+  --brand: #d94a48;
+  --brand-deep: #b93a38;
+  --butter: #e6bb63;
+  --butter-soft: #6a4d27;
+  --espresso: #0f0a08;
 }
 
 @theme inline {
@@ -23,6 +43,8 @@
   --color-brand-deep: var(--brand-deep);
   --color-butter: var(--butter);
   --color-butter-soft: var(--butter-soft);
+  --color-espresso: var(--espresso);
+  --color-linen: var(--linen);
   --font-display: var(--font-playfair);
   --font-sans: var(--font-dm-sans);
 }
@@ -37,6 +59,51 @@ body {
   font-family: var(--font-sans), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
+
+/* Theme switch: colours cross-fade; with the View Transitions API the new theme also wipes in as a circle from the toggle */
+body { transition: background-color 400ms ease, color 400ms ease; }
+::view-transition-old(root),
+::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
+::view-transition-new(root) { animation: theme-reveal 700ms cubic-bezier(0.22, 1, 0.36, 1); }
+@keyframes theme-reveal {
+  from { clip-path: circle(0 at var(--vt-x, 50%) var(--vt-y, 50%)); }
+  to { clip-path: circle(var(--vt-r, 150vmax) at var(--vt-x, 50%) var(--vt-y, 50%)); }
+}
+/* Sun/moon toggle: pill track with a knob that slides; icons cross-fade and spin */
+.theme-toggle {
+  position: relative;
+  width: 3.25rem;
+  height: 1.75rem;
+  border-radius: 9999px;
+  border: 1px solid color-mix(in srgb, var(--cocoa) 15%, transparent);
+  background: var(--cream-deep);
+  transition: background-color 400ms ease, border-color 400ms ease;
+}
+.theme-toggle:focus-visible { outline: 2px solid var(--brand); outline-offset: 3px; }
+.theme-toggle .knob {
+  position: absolute;
+  top: 0.125rem;
+  left: 0.125rem;
+  width: 1.375rem;
+  height: 1.375rem;
+  border-radius: 9999px;
+  background: var(--paper);
+  box-shadow: 0 2px 6px rgb(0 0 0 / 0.25);
+  display: grid;
+  place-items: center;
+  transition: transform 450ms cubic-bezier(0.34, 1.56, 0.64, 1), background-color 400ms ease;
+}
+[data-theme="dark"] .theme-toggle .knob { transform: translateX(1.5rem); }
+.theme-toggle svg {
+  position: absolute;
+  width: 0.875rem;
+  height: 0.875rem;
+  transition: opacity 300ms ease, transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.theme-toggle .sun { color: #d99a2b; opacity: 1; transform: rotate(0) scale(1); }
+.theme-toggle .moon { color: #e6bb63; opacity: 0; transform: rotate(-120deg) scale(0.4); }
+[data-theme="dark"] .theme-toggle .sun { opacity: 0; transform: rotate(120deg) scale(0.4); }
+[data-theme="dark"] .theme-toggle .moon { opacity: 1; transform: rotate(0) scale(1); }
 
 h1, h2, h3, .font-display {
   font-family: var(--font-display), Georgia, serif;
@@ -74,7 +141,7 @@ h1, h2, h3, .font-display {
 
 @utility btn-primary {
   background: var(--brand);
-  color: var(--paper);
+  color: var(--linen);
   box-shadow: 0 10px 24px -12px rgb(163 45 45 / 0.6);
   &:hover { background: var(--brand-deep); }
 }
@@ -83,6 +150,17 @@ h1, h2, h3, .font-display {
   border: 1.5px solid currentColor;
   color: var(--cocoa);
   &:hover { background: var(--cocoa); color: var(--paper); }
+}
+
+/* Pulsing warm glow for the primary "Order now" CTA; reduced-motion users get the static first frame */
+@utility btn-glow {
+  box-shadow: 0 0 0 0 rgb(163 45 45 / 0.5), 0 0 18px 2px rgb(224 178 90 / 0.35);
+  animation: btn-glow 2.4s ease-in-out infinite;
+  &:hover { animation-play-state: paused; }
+}
+@keyframes btn-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgb(163 45 45 / 0.5), 0 0 18px 2px rgb(224 178 90 / 0.35); }
+  50% { box-shadow: 0 0 0 10px rgb(163 45 45 / 0), 0 0 34px 10px rgb(224 178 90 / 0.6); }
 }
 
 /* Subtle paper grain so large cream areas do not read flat */
@@ -96,6 +174,55 @@ h1, h2, h3, .font-display {
   pointer-events: none;
   opacity: 0.35;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.23 0 0 0 0 0.16 0 0 0 0 0.13 0 0 0 0.08 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Hero photo: tilted 3D card with a gold slab behind, gloss on top, slow float; straightens on hover */
+.hero-card {
+  transform-style: preserve-3d;
+  transform: rotateY(-6deg) rotateX(4deg);
+  animation: hero-float 6s ease-in-out infinite;
+  transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
+  filter: drop-shadow(0 40px 40px rgb(59 42 34 / 0.35)) drop-shadow(0 12px 12px rgb(163 45 45 / 0.18));
+  will-change: transform;
+}
+.hero-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 2rem;
+  background: linear-gradient(135deg, var(--butter) 0%, var(--butter-soft) 100%);
+  transform: translate3d(1.25rem, 1.5rem, -60px);
+}
+.hero-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 2rem;
+  pointer-events: none;
+  background: linear-gradient(115deg, rgb(255 255 255 / 0.45) 0%, rgb(255 255 255 / 0) 38%, rgb(255 255 255 / 0) 70%, rgb(163 45 45 / 0.08) 100%);
+  transform: translateZ(1px);
+}
+.hero-card:hover {
+  transform: rotateY(0) rotateX(0) translateY(-6px) scale(1.03);
+  animation-play-state: paused;
+}
+@media (min-width: 1024px) {
+  .hero-card { transform: rotateY(-12deg) rotateX(7deg); }
+}
+@keyframes hero-float {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -10px; }
+}
+
+/* Bestseller carousel: native scroll-snap; buttons and the auto-advance in BestsellerCarousel.tsx call scrollTo */
+.bestseller-viewport {
+  --step: 18.25rem; /* card 17rem + gap 1.25rem; keep in sync with STEP_REM */
+  padding-inline: 1.5rem; /* snapped card sits fully inside the mask; only a card mid-slide fades */
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 1.5rem;
+  scrollbar-width: none;
+  mask-image: linear-gradient(to right, transparent, #000 1.5rem, #000 calc(100% - 1.5rem), transparent);
+  &::-webkit-scrollbar { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { brand, nav } from "@/lib/brand";
+import ThemeToggle from "@/components/ThemeToggle";
 
 export default function Header() {
   const pathname = usePathname();
@@ -40,23 +41,29 @@ export default function Header() {
               </Link>
             );
           })}
-          <a href={brand.whatsappHref} target="_blank" rel="noopener" className="btn btn-primary !py-2.5 !px-5 text-sm">
-            Order on WhatsApp
-          </a>
+          <div className="flex items-center gap-4">
+            <ThemeToggle />
+            <a href={brand.whatsappHref} target="_blank" rel="noopener" className="btn btn-primary !py-2.5 !px-5 text-sm">
+              Order on WhatsApp
+            </a>
+          </div>
         </nav>
 
-        <button
-          type="button"
-          className="md:hidden inline-flex h-11 w-11 items-center justify-center rounded-full text-cocoa hover:bg-cocoa/5"
-          aria-expanded={menuOpen}
-          aria-controls="mobile-nav"
-          aria-label={menuOpen ? "Close menu" : "Open menu"}
-          onClick={() => { setOpenedAt(pathname); setOpen(!menuOpen); }}
-        >
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-            {menuOpen ? <path d="M6 6l12 12M18 6L6 18" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
-          </svg>
-        </button>
+        <div className="flex items-center gap-2 md:hidden">
+          <ThemeToggle />
+          <button
+            type="button"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full text-cocoa hover:bg-cocoa/5"
+            aria-expanded={menuOpen}
+            aria-controls="mobile-nav"
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            onClick={() => { setOpenedAt(pathname); setOpen(!menuOpen); }}
+          >
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+              {menuOpen ? <path d="M6 6l12 12M18 6L6 18" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
+            </svg>
+          </button>
+        </div>
       </div>
 
       <div id="mobile-nav" hidden={!menuOpen} className="md:hidden border-t border-cocoa/10 bg-cream">

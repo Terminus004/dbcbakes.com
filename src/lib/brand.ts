@@ -15,9 +15,9 @@ export const brand = {
   cin: "U46304WB2025PTC281467",
   locations: [
     {
-      label: "Head Office, Kolkata",
-      lines: ["CD-51, Ground Floor, Salt Lake, Sector I", "Bidhannagar, Kolkata 700064", "West Bengal"],
-      mapsHref: "https://maps.google.com/?q=CD-51+Salt+Lake+Sector+I+Kolkata+700064",
+      label: "Kolkata",
+      lines: ["73/2 Ashwini Datta Road", "Near VIP Garden, Baguihati", "Kolkata 700059, West Bengal"],
+      mapsHref: "https://maps.google.com/?q=73%2F2+Ashwini+Datta+Road+Baguihati+Kolkata+700059",
     },
     {
       label: "Bakery, Durgapur",

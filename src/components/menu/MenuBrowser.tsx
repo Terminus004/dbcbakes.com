@@ -102,50 +102,76 @@ export default function MenuBrowser({ initialCategory }: { initialCategory: Filt
             .
           </p>
         ) : category === "All" ? (
-          <div className="space-y-12">
+          <div className="space-y-14">
             {categories.map((cat) => {
               const items = matches.filter((p) => p.category === cat.name);
               if (items.length === 0) return null;
               return (
                 <section key={cat.name}>
-                  <h2 className="text-2xl">{cat.name}</h2>
-                  <p className="mt-1 text-sm text-cocoa-soft">{cat.blurb}</p>
-                  <ProductList items={items} />
+                  <div className="flex flex-wrap items-end justify-between gap-x-6 gap-y-1">
+                    <div>
+                      <h2 className="text-2xl">{cat.name}</h2>
+                      <p className="mt-1 text-sm text-cocoa-soft">{cat.blurb}</p>
+                    </div>
+                    <p className="text-xs font-semibold uppercase tracking-[0.18em] text-cocoa-soft">
+                      {items.length} item{items.length === 1 ? "" : "s"}
+                    </p>
+                  </div>
+                  <ProductTable items={items} />
                 </section>
               );
             })}
           </div>
         ) : (
-          <ProductList items={matches} />
+          <ProductTable items={matches} />
         )}
       </div>
     </div>
   );
 }
 
-function ProductList({ items }: { items: typeof products }) {
+function ProductTable({ items }: { items: typeof products }) {
   return (
-    <ul className="mt-4 grid gap-x-8 md:grid-cols-2">
-      {items.map((p) => (
-        <li key={p.name} className="flex items-baseline gap-2 border-b border-cocoa-soft/15 py-3">
-          <span className="text-cocoa">{p.name}</span>
-          {p.bestseller && (
-            <span className="shrink-0 rounded-full bg-butter px-2 py-0.5 text-xs font-semibold text-cocoa">
-              Bestseller
-            </span>
-          )}
-          <span className="flex-1 border-b border-dotted border-cocoa-soft/40" aria-hidden="true" />
-          <span className="shrink-0 font-medium text-cocoa">from {formatINR(p.price)}</span>
-          <a
-            href={orderHref(p.name)}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="shrink-0 text-sm font-semibold text-brand underline underline-offset-2 focus-visible:outline-2 focus-visible:outline-brand"
-          >
-            Order
-          </a>
-        </li>
-      ))}
-    </ul>
+    <div className="mt-5 overflow-x-auto rounded-2xl border border-cocoa/10 bg-paper shadow-[0_24px_48px_-36px_rgba(59,42,34,0.45)]">
+      <table className="w-full min-w-[20rem] border-collapse text-left">
+        <thead>
+          <tr className="border-b border-cocoa/10 bg-cream-deep/50 text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-cocoa-soft">
+            <th scope="col" className="px-4 py-3 sm:px-5">Item</th>
+            <th scope="col" className="w-px whitespace-nowrap px-3 py-3 text-right sm:px-5">Price</th>
+            <th scope="col" className="w-px px-3 py-3 text-right sm:px-5">
+              <span className="sr-only">Order</span>
+            </th>
+          </tr>
+        </thead>
+        <tbody className="divide-y divide-cocoa/10">
+          {items.map((p) => (
+            <tr key={p.name} className="transition-colors hover:bg-cream/70">
+              <td className="px-4 py-3.5 sm:px-5">
+                <span className="font-medium text-cocoa">{p.name}</span>
+                {p.bestseller && (
+                  <span className="ml-2 inline-block rounded-full bg-butter px-2 py-0.5 align-middle text-[0.62rem] font-semibold uppercase tracking-wider text-cocoa">
+                    Bestseller
+                  </span>
+                )}
+              </td>
+              <td className="w-px whitespace-nowrap px-3 py-3.5 text-right tabular-nums text-cocoa sm:px-5">
+                <span className="text-xs text-cocoa-soft">from </span>
+                {formatINR(p.price)}
+              </td>
+              <td className="w-px whitespace-nowrap px-3 py-3.5 text-right sm:px-5">
+                <a
+                  href={orderHref(p.name)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center rounded-full border border-brand/40 px-3 py-1 text-xs font-semibold text-brand transition-colors hover:bg-brand hover:text-paper focus-visible:outline-2 focus-visible:outline-brand"
+                >
+                  Order
+                </a>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 }
