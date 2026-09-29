@@ -9,11 +9,11 @@ export default function Hero() {
         <div className="text-center lg:text-left">
           <p className="eyebrow flex items-center justify-center gap-3 lg:justify-start">
             <span aria-hidden="true" className="h-px w-8 bg-brand/70" />
-            {brand.formerName} · Est. {brand.founded}
+            {brand.formerName}
           </p>
           <h1 className="mt-6 text-balance text-[2.75rem] leading-[1.04] tracking-[-0.02em] sm:text-[3.75rem] lg:text-wrap lg:text-[4.25rem]">
-            Baked in Durgapur since{" "}
-            <span className="italic text-brand">{brand.founded}</span>.
+            Baked in Durgapur,{" "}
+            <span className="italic text-brand">loved for three generations</span>.
           </h1>
           <p className="mx-auto mt-7 max-w-[34rem] text-pretty text-[1.05rem] leading-[1.7] text-cocoa-soft sm:text-lg lg:mx-0">
             The biscuit tin on every Durgapur tea table&nbsp;— bread, jars and plum cake

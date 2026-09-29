@@ -12,7 +12,7 @@ export default function Footer() {
             <p className="font-display text-2xl">DBC Bakery</p>
           </div>
           <p className="mt-5 max-w-sm text-sm leading-relaxed text-linen/75">
-            {brand.formerName} since {brand.founded}. Bread, biscuits and cakes baked the way Durgapur has loved them for three generations.
+            {brand.formerName}, now {brand.name}. Bread, biscuits and cakes baked the way Durgapur has loved them for three generations.
           </p>
           <p className="mt-6 font-display text-lg italic text-butter">“A party without cake is just a meeting.”</p>
         </div>
@@ -44,7 +44,15 @@ export default function Footer() {
 
       <div className="border-t border-linen/10">
         <div className="container-x flex flex-col gap-4 py-6 text-xs text-linen/60 sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} {brand.legalName}. FSSAI Lic. No. {brand.fssai}</p>
+          <p>
+            © {new Date().getFullYear()} {brand.legalName}. FSSAI Lic. No. {brand.fssai}
+            <span className="block text-linen/40">
+              Savouries photo: Joy,{" "}
+              <a href="https://creativecommons.org/licenses/by/2.0/" target="_blank" rel="noopener" className="underline underline-offset-2 hover:text-white">
+                CC BY 2.0
+              </a>
+            </span>
+          </p>
           <div className="flex flex-wrap gap-5">
             <a href={brand.phoneHref} className="hover:text-white">{brand.phone}</a>
             <a href={`mailto:${brand.email}`} className="hover:text-white">{brand.email}</a>

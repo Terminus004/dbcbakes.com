@@ -21,9 +21,6 @@ export default function Header() {
           <Image src="/logo.png" alt="" width={44} height={44} priority className="rounded-full" />
           <span className="font-display text-xl leading-none tracking-tight">
             DBC <span className="text-brand">Bakery</span>
-            <span className="block font-sans text-[0.6rem] font-semibold uppercase tracking-[0.25em] text-cocoa-soft">
-              Since {brand.founded}
-            </span>
           </span>
         </Link>
 

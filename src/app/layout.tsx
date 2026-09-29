@@ -11,8 +11,8 @@ const dmSans = DM_Sans({ variable: "--font-dm-sans", subsets: ["latin"], display
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://dbcbakes.com"),
-  title: { default: `${brand.name} · Baking in Bengal since ${brand.founded}`, template: `%s · ${brand.name}` },
-  description: `${brand.formerName}, now ${brand.name}. Fresh bread, biscuit jars, plum cakes and custom celebration cakes from Durgapur and Kolkata since ${brand.founded}.`,
+  title: { default: `${brand.name} · Bakery in Durgapur & Kolkata`, template: `%s · ${brand.name}` },
+  description: `${brand.formerName}, now ${brand.name}. Fresh bread, biscuit jars, plum cakes and custom celebration cakes from Durgapur and Kolkata.`,
   openGraph: { type: "website", siteName: brand.name, images: ["/images/winter-campaign.jpg"] },
 };
 

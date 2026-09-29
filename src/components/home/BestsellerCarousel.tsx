@@ -69,9 +69,13 @@ export default function BestsellerCarousel({ items }: { items: Product[] }) {
               <article className="flex h-full flex-col items-center rounded-3xl border border-cocoa/10 bg-paper px-6 py-8 shadow-[0_24px_48px_-36px_rgba(59,42,34,0.5)]">
                 <p className="eyebrow">{p.category}</p>
                 <h3 className="mt-3 text-balance text-2xl leading-tight">{p.name}</h3>
-                <p className="mt-4 text-sm text-cocoa-soft">
-                  from <span className="text-lg font-semibold text-cocoa">{formatINR(p.price)}</span>
-                </p>
+                {p.price !== undefined ? (
+                  <p className="mt-4 text-sm text-cocoa-soft">
+                    from <span className="text-lg font-semibold text-cocoa">{formatINR(p.price)}</span>
+                  </p>
+                ) : (
+                  <p className="mt-4 text-sm text-cocoa-soft">Ask us for today&apos;s price</p>
+                )}
                 <a
                   href={orderHref(p.name)}
                   target="_blank"

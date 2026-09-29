@@ -19,7 +19,7 @@ export default async function Page(props: PageProps<"/menu">) {
         <p className="eyebrow">Our menu</p>
         <h1 className="mt-3 text-4xl md:text-5xl">Everything we bake</h1>
         <p className="mt-4 max-w-xl text-cocoa-soft">
-          Prices are starting from — for large orders, just ask us on WhatsApp.
+          Prices are starting from where shown — for everything else, and for large orders, just ask us on WhatsApp.
         </p>
       </section>
 

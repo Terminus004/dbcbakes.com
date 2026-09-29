@@ -4,7 +4,7 @@ Marketing site for DBC Bakery Private Limited (formerly Durgapur Bakery, est. 19
 
 ## Layout
 - `src/lib/brand.ts` — single source for contact details, addresses, hours, socials. Edit here, not in components.
-- `src/lib/products.ts` — catalogue (66 SKUs scraped from dbcbakes.com/menu, Sept 2026) with categories and bestseller flags.
+- `src/lib/products.ts` — catalogue (158 items, 14 categories, from `../DBC_Bakery_Catalogue_2026.pdf`). `price` is optional: the 65 legacy SKUs keep their old dbcbakes.com prices, the rest show "Ask". `bestseller` = "Signature" in the PDF.
 - `src/app/globals.css` — brand tokens (cream/cocoa/brand red/butter gold), fonts, `container-x`, `btn*`, `eyebrow`, `.grain` utilities.
 - Pages: `/` `/menu?c=<Category>` `/about` `/contact`.
 
@@ -19,7 +19,8 @@ Marketing site for DBC Bakery Private Limited (formerly Durgapur Bakery, est. 19
 - Docs for this exact version live in `node_modules/next/dist/docs/`.
 
 ## Open items for the client
-- Instagram (@dbcbakery24) could not be scraped; confirm handle and get real product photography.
+- Instagram (@dbcbakery24) could not be scraped; confirm handle and get real product photography. Category cards use one stock photo each (Pexels + one CC BY from Wikimedia, credited in the footer); replace with the client's own shots.
+- Prices for the 93 items new in the 2026 catalogue; they currently show "Ask".
 - Opening hours in `brand.ts` are a placeholder.
 - "Anytime – 400 g" price (₹25) copied from the old site looks wrong.
 

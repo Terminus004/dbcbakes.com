@@ -1,5 +1,46 @@
 # Changelog
 
+## 2026-09-29 — One photo per category card
+
+### Added
+- `public/images/celebration-cake.jpg`, `muffins.jpg`, `croissants.jpg` — Pexels licence (no attribution): Silvia Trigo #1857157, Castorly Stock #3650438, Valeria Boltneva #19498991. Resized to 1600 px wide, JPEG q80.
+- `public/images/savouries.jpg` — "Curry turnovers" by Joy, CC BY 2.0, via Wikimedia Commons. 1600 px, q60. Credit line added to the footer's bottom bar (required by the licence; drop it when the client replaces the photo).
+
+### Changed
+- `src/lib/products.ts` — every one of the 14 categories now has its own image: Cakes → winter-campaign (client's plum-cake artwork), Toast & Rusk → rusk, Celebration Cakes → celebration-cake, Tea Cakes & Muffins → muffins, Pastries & Tarts → cupcakes, Brownies → brownies, The Reserve → croissants, Breads & Buns → buns, Snacks → snack-mix, Artisan Breads → bread, Savouries → savouries, Biscuits → cookie-bowl, Cookies → cookie-stack, Biscuit Jars → coconut-jar.
+- `src/components/Footer.tsx` — photo credit under the copyright line.
+- `CLAUDE.md` — open item reworded: photos are unique stock placeholders pending client photography.
+
+### Verification
+- `grep -o 'image: "[^"]*"' src/lib/products.ts | sort -u | wc -l` = 14. `tsc`, `eslint src`, `npm run build` clean; home page serves 14 distinct category images.
+
+## 2026-09-29 — Menu rebuilt from the 2026 catalogue
+
+### Changed
+- `src/lib/products.ts` — old 65-SKU dbcbakes.com menu replaced by the 158 items in `../DBC_Bakery_Catalogue_2026.pdf`, in catalogue order across 14 categories: Cakes, Toast & Rusk, Celebration Cakes, Tea Cakes & Muffins, Pastries & Tarts, Brownies, The Reserve, Breads & Buns, Snacks, Artisan Breads, Savouries, Biscuits, Cookies, Biscuit Jars. Category blurbs are the PDF's section intros. `Product.price` is now optional: the 65 legacy items keep their old prices, the 93 new items have none (the PDF carries no prices). `bestseller` = "Signature" in the PDF (19 items). "Cinnamon Roll" is listed under both The Reserve and Artisan Breads, as printed.
+- `src/components/menu/MenuBrowser.tsx` — price cell shows "Ask" when there is no price.
+- `src/components/home/BestsellerCarousel.tsx` — unpriced bestsellers show "Ask us for today's price" instead of a `from ₹` line.
+- `src/app/menu/page.tsx`, `src/components/home/Bestsellers.tsx` — "starting from" copy now says prices are shown where known, ask for the rest.
+- `src/components/home/Categories.tsx` — "Six counters" → "Fourteen counters". Category card images are reused stock: cupcakes (Celebration Cakes, Tea Cakes & Muffins), bread (The Reserve, Artisan Breads), buns (Breads & Buns, Savouries), plus the winter-campaign plum cake for Cakes. Needs real photography.
+- Stats strip "Products on the counter" auto-updates to 150+.
+- `CLAUDE.md` — catalogue description and two new open items (photos, prices for the new items).
+
+### Verification
+- `tsc`, `eslint src`, `npm run build` clean. Every legacy name+price pair verified present in the new array by script. Production server curl: `/menu` renders 158 Order rows and 93 "Ask" cells, home renders 14 category cards, `/menu?c=Savouries` selects the pill.
+
+## 2026-09-29 — Drop "since 1957" copy
+
+### Changed
+- `src/app/layout.tsx` — default title `DBC Bakery · Bakery in Durgapur & Kolkata`; description no longer ends "since 1957".
+- `src/components/Header.tsx` — "Since 1957" pill under the logo removed.
+- `src/components/home/Hero.tsx` — eyebrow is now just "Durgapur Bakery"; H1 "Baked in Durgapur since 1957." → "Baked in Durgapur, *loved for three generations*."
+- `src/components/Footer.tsx` — "Durgapur Bakery since 1957." → "Durgapur Bakery, now DBC Bakery."
+- `src/components/home/HeritageStrip.tsx` — "1957 / Baking since" stat removed; strip is three columns at every width.
+- Kept on purpose: `brand.founded`, the "65+ years" stat, the About timeline 1957 entry and the StoryTeaser "It started in 1957" line — narrative, not "since" badges.
+
+### Verification
+- `tsc`, `eslint src`, `npm run build` clean. `grep -rn "since\|Est\." src` shows no remaining founding-year badges.
+
 ## 2026-09-10 — Dark mode
 
 ### Added

@@ -155,8 +155,14 @@ function ProductTable({ items }: { items: typeof products }) {
                 )}
               </td>
               <td className="w-px whitespace-nowrap px-3 py-3.5 text-right tabular-nums text-cocoa sm:px-5">
-                <span className="text-xs text-cocoa-soft">from </span>
-                {formatINR(p.price)}
+                {p.price !== undefined ? (
+                  <>
+                    <span className="text-xs text-cocoa-soft">from </span>
+                    {formatINR(p.price)}
+                  </>
+                ) : (
+                  <span className="text-sm text-cocoa-soft">Ask</span>
+                )}
               </td>
               <td className="w-px whitespace-nowrap px-3 py-3.5 text-right sm:px-5">
                 <a

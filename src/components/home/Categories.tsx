@@ -7,7 +7,7 @@ export default function Categories() {
     <section aria-labelledby="categories-heading" className="container-x py-20 md:py-28">
       <p className="eyebrow">What we bake</p>
       <h2 id="categories-heading" className="mt-4 max-w-2xl text-3xl leading-tight sm:text-4xl">
-        Six counters, one bakery.
+        Fourteen counters, one bakery.
       </h2>
       <p className="mt-4 max-w-xl text-cocoa-soft">
         Everything is mixed, proofed and baked in-house — the same recipes the family

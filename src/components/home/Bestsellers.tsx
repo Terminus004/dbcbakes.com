@@ -14,7 +14,7 @@ export default function Bestsellers() {
 
         <BestsellerCarousel items={bestsellers} />
 
-        <p className="mt-6 text-sm text-cocoa-soft">Prices are per piece or per jar, starting from.</p>
+        <p className="mt-6 text-sm text-cocoa-soft">Prices are per piece or per jar, starting from — ask us for the rest.</p>
 
         <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
           <a href={brand.whatsappHref} target="_blank" rel="noopener" className="btn btn-primary btn-glow">
